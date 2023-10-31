@@ -56,7 +56,8 @@ parts:
       make app-local APP_NAME=vmagent
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -p $SNAPCRAFT_PART_BUILD/bin/vmagent $SNAPCRAFT_PART_INSTALL/bin/
-      cp -p $SNAPCRAFT_PART_SRC/local/vmagent-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmagent-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmagent-scrape-config.yaml SNAP_DATA/etc/vmagent-scrape-config.yaml
     override-pull: |
       snapcraftctl set-version "$PKG_TAG"
       snapcraftctl pull
