@@ -1,0 +1,60 @@
+name: vmalert
+base: core18
+adopt-info: build
+icon: logo.png
+summary: executes a list of given alerting or recording rules
+description: |
+  For sending alerting notifications *vmalert** relies on **Alertmanager** configured via `-notifier.url` flag. 
+  Recording rules results are persisted via remote write protocol and require `-remoteWrite.url` to be configured.
+  vmalert is heavily inspired by **Prometheus** implementation and aims to be compatible with its syntax.
+
+  A single-node or cluster version of **VictoriaMetrics** are capable of proxying requests to vmalert via `-vmalert.proxyURL` command-line flag.
+  Use this feature for the following cases:
+  * for proxying requests from **Grafana Alerting UI**;
+  * for accessing vmalerts **UI** through **VictoriaMetrics Web** interface.
+  * Integration with VictoriaMetrics TSDB;
+  * VictoriaMetrics MetricsQL support and expressions validation;
+  * Prometheus alerting rules definition format support;
+  * Integration with Alertmanager starting from Alertmanager v0.16.0-alpha;
+  * Keeps the alerts state on restarts;
+  * Graphite datasource can be used for alerting and recording rules. See these docs;
+  * Recording and Alerting rules backfilling (aka replay). See these docs;
+  * Lightweight and without extra dependencies.
+  * Supports reusable templates for annotations;
+  * Load of recording and alerting rules from local filesystem, URL, GCS and S3;
+  * Detect alerting rules which don't match any series.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+parts:
+  build:
+    plugin: go
+    go-channel: 1.21/stable
+    go-importpath: github.com/VictoriaMetrics/VictoriaMetrics
+    source: .
+    source-type: local
+    build-packages: [build-essential, make]
+    override-build: |
+      make app-local APP_NAME=vmalert
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp -p $SNAPCRAFT_PART_BUILD/bin/vmalert $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/local/vmalert-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+    override-pull: |
+      snapcraftctl set-version "$PKG_TAG"
+      snapcraftctl pull
+apps:
+  vmalert:
+    command: bin/vmalert-wrapper
+    daemon: simple
+    restart-condition: always
+    restart-delay: 10s
+    plugs: [network,network-bind]
+
+plugs:
+  network:
+  network-bind:
+
+architectures:
+  - build-on: ['arm64', 'amd64', 'ppc64el']
+    run-on: ['arm64','amd64', 'ppc64el']

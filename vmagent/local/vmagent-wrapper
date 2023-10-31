@@ -1,0 +1,7 @@
+!/bin/bash
+
+test -e $SNAP_DATA/extra_flags || echo 'FLAGS=""' > $SNAP_DATA/extra_flags
+
+# get args
+. $SNAP_DATA/extra_flags
+$SNAP/bin/vmagent -remoteWrite.url=http://127.0.0.1:8428/api/v1/write -remoteWrite.tmpDataPath=/var/lib/vmagent -promscrape.config=/etc/vmagent-scrape-config.yam -remoteWrite.tmpDataPath $FLAGS
