@@ -9,7 +9,7 @@ snap-vmagent-builder-image:
 	|| docker build \
 		--build-arg GO_VERSION=$(GO_VERSION) \
 		--tag $(SNAP_BUILDER_IMAGE) \
-		snap/vmagent/local
+		snap/local
 
 build-vmagent-snap: snap-vmagent-builder-image
 	docker run --rm \
