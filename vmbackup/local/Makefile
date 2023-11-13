@@ -1,4 +1,4 @@
-GO_VERSION ?=1.21.3
+GO_VERSION ?=1.21.4
 SNAP_BUILDER_IMAGE := local/snap-vmbackup-builder:2.0.0-$(shell echo $(GO_VERSION) | tr :/ __)
 
 # truncate pkg_tag, snap has limitations for name length
@@ -9,7 +9,7 @@ snap-vmbackup-builder-image:
 	|| docker build \
 		--build-arg GO_VERSION=$(GO_VERSION) \
 		--tag $(SNAP_BUILDER_IMAGE) \
-		snap/vmbackup/local
+		snap/local
 
 build-vmbackup-snap: snap-vmbackup-builder-image
 	docker run --rm \
