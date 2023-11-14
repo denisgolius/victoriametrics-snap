@@ -52,13 +52,6 @@ parts:
     source: .
     source-type: local
     build-packages: [build-essential, make]
-  # example-config:
-  #   plugin: dump
-  #   source: .
-  #   organize:
-  #     vmagent-scrape-config.yaml: vmagent-scrape-config.yaml
-  #   prime:
-  #     - vmagent-scrape-config.yaml
     override-build: |
       make app-local APP_NAME=vmagent
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
