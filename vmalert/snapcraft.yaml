@@ -39,7 +39,8 @@ parts:
       make app-local APP_NAME=vmalert
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -p $SNAPCRAFT_PART_BUILD/bin/vmalert $SNAPCRAFT_PART_INSTALL/bin/
-      cp -p $SNAPCRAFT_PART_SRC/local/vmalert-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmalert-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmalert-rules.yaml $SNAP_DATA/etc/vmalert-rules.yaml
     override-pull: |
       snapcraftctl set-version "$PKG_TAG"
       snapcraftctl pull
@@ -55,6 +56,9 @@ plugs:
   network:
   network-bind:
 
+layout:
+  /etc/vmagent-scrape-config.yaml:
+    bind-file: $SNAP_DATA/etc/vmalert-rules.yaml
 architectures:
   - build-on: ['arm64', 'amd64', 'ppc64el']
     run-on: ['arm64','amd64', 'ppc64el']

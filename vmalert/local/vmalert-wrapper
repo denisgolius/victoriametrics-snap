@@ -1,7 +1,8 @@
-!/bin/bash
+!/bin/sh
 
 test -e $SNAP_DATA/extra_flags || echo 'FLAGS=""' > $SNAP_DATA/extra_flags
 
 # get args
 . $SNAP_DATA/extra_flags
-$SNAP/bin/vmalert -rule=/etc/vmalert-alert-rules.yaml -datasource.url=http://localhost:8428 -notifier.url=http://localhost:9093 -notifier.url=http://127.0.0.1:9093 -remoteWrite.url=http://localhost:8428 remoteRead.url=http://localhost:8428 -external.label=cluster=east-1 -external.label=replica=a $FLAGS
+cp -pn $SNAP/etc/vmalert-rules.yaml $SNAP_DATA/etc/vmalert-rules.yaml
+$SNAP/bin/vmalert -datasource.url=http://127.0.0.14:8428 -remoteWrite.url=http://127.0.0.14:8428 -remoteRead.url=http://127.0.0.14:8428 -notifier.url=http://127.0.0.1:9093 -rule=/etc/vmalert-rules.yaml $FLAGS
