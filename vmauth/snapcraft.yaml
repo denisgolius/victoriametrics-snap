@@ -4,27 +4,27 @@ adopt-info: build
 icon: logo.png
 summary: vmauth is a simple auth proxy, router and load balancer for VictoriaMetrics
 description: |
-    It reads auth credentials from `Authorization` http header (Basic Auth, `Bearer token` and InfluxDB authorization is supported), matches them against configs pointed by -auth.config command-line flag and proxies incoming HTTP requests to the configured per-user `url_prefix` on successful match. The `-auth.config` can point to either local file or to http url.
+  It reads auth credentials from `Authorization` http header (Basic Auth, `Bearer token` and InfluxDB authorization is supported), matches them against configs pointed by -auth.config command-line flag and proxies incoming HTTP requests to the configured per-user `url_prefix` on successful match. The `-auth.config` can point to either local file or to http url.
 
-    **Quick start**
+  **Quick start**
 
-    Just download `vmutils-*` archive from releases page, unpack it and pass the following flag to vmauth binary in order to start authorizing and routing requests:
+  Just download `vmutils-*` archive from releases page, unpack it and pass the following flag to vmauth binary in order to start authorizing and routing requests:
 
-    `/path/to/vmauth -auth.config=/path/to/auth/config.yml`
+  `/path/to/vmauth -auth.config=/path/to/auth/config.yml`
 
-    After that vmauth starts accepting HTTP requests on port `8427` and routing them according to the provided -auth.config. The port can be modified via `-httpListenAddr` command-line flag.
+  After that vmauth starts accepting HTTP requests on port `8427` and routing them according to the provided -auth.config. The port can be modified via `-httpListenAddr` command-line flag.
 
-    The auth config can be reloaded via the following ways:
+  The auth config can be reloaded via the following ways:
 
-      *  By passing `SIGHUP` signal to `vmauth`.
-      *  By querying `/-/reload` http endpoint. This endpoint can be protected with `-reloadAuthKey` command-line flag. See security docs for more details.
-      *  By specifying -configCheckInterval command-line flag to the interval between config re-reads. For example, `-configCheckInterval=5s` will re-read the config and apply new changes every 5 seconds.
+    *  By passing `SIGHUP` signal to `vmauth`.
+    *  By querying `/-/reload` http endpoint. This endpoint can be protected with `-reloadAuthKey` command-line flag. See security docs for more details.
+    *  By specifying -configCheckInterval command-line flag to the interval between config re-reads. For example, `-configCheckInterval=5s` will re-read the config and apply new changes every 5 seconds.
 
-    See how vmauth used in docker-compose env at https://github.com/VictoriaMetrics/VictoriaMetrics/blob/master/deployment/docker/README.md#victoriametrics-cluster.
+  See how vmauth used in docker-compose env at https://github.com/VictoriaMetrics/VictoriaMetrics/blob/master/deployment/docker/README.md#victoriametrics-cluster.
 
-    Pass `-help` to `vmauth` in order to see all the supported command-line flags with their descriptions.
+  Pass `-help` to `vmauth` in order to see all the supported command-line flags with their descriptions.
 
-    Feel free contacting us if you need customized auth proxy for VictoriaMetrics with the support of LDAP, SSO, RBAC, SAML, accounting and rate limiting such as https://docs.victoriametrics.com/vmgateway.html .
+  Feel free contacting us if you need customized auth proxy for VictoriaMetrics with the support of LDAP, SSO, RBAC, SAML, accounting and rate limiting such as https://docs.victoriametrics.com/vmgateway.html .
 
 grade: stable # must be 'stable' to release into candidate/stable channels
 confinement: strict # use 'strict' once you have the right plugs and slots
@@ -42,6 +42,7 @@ parts:
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -p $SNAPCRAFT_PART_BUILD/bin/vmauth $SNAPCRAFT_PART_INSTALL/bin/
       cp -p $SNAPCRAFT_PART_SRC/local/vmauth-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmauth-config.yml $SNAP_DATA/etc/vmauth-config.yml
     override-pull: |
       snapcraftctl set-version "$PKG_TAG"
       snapcraftctl pull
@@ -61,7 +62,7 @@ layout:
   /var/lib/victoriametrics:
     bind: $SNAP_DATA/var/lib/vmauth
   /etc/victoriametrics-scrape-config.yaml:
-    bind-file: $SNAP_DATA/etc/vmauth-config.yaml
+    bind-file: $SNAP_DATA/etc/vmauth-config.yml
 architectures:
   - build-on: ['arm64', 'amd64', 'ppc64el']
     run-on: ['arm64','amd64', 'ppc64el']

@@ -1,0 +1,9 @@
+users:
+  # The given user can send maximum 10 concurrent requests according to the provided max_concurrent_requests.
+  # Excess concurrent requests are rejected with 429 HTTP status code.
+  # See also -maxConcurrentPerUserRequests and -maxConcurrentRequests command-line flags.
+- username: "local-single-node"
+  password: "password"
+  url_prefix: "http://localhost:8428"
+  max_concurrent_requests: 10
+  # See more examples at https://docs.victoriametrics.com/vmauth.html#auth-config
