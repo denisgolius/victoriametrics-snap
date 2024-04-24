@@ -51,5 +51,5 @@ layout:
   /var/lib/victorialogs:
     bind: $SNAP_DATA/var/lib/victorialogs
 architectures:
-  - build-on: ['arm64', 'amd64', 'ppc64el']
-    run-on: ['arm64','amd64', 'ppc64el']
+  - build-on: ['amd64']
+    run-on: ['amd64']
