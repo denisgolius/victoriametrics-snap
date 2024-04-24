@@ -27,7 +27,7 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 parts:
   build:
     plugin: go
-    go-channel: 1.21/stable
+    go-channel: 1.22/stable
     go-importpath: github.com/VictoriaMetrics/VictoriaMetrics
     source: .
     source-type: local
@@ -36,7 +36,7 @@ parts:
       make app-local APP_NAME=vmrestore
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -p $SNAPCRAFT_PART_BUILD/bin/vmrestore $SNAPCRAFT_PART_INSTALL/bin/
-      cp -p $SNAPCRAFT_PART_SRC/local/vmrestore-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmrestore-wrapper $SNAPCRAFT_PART_INSTALL/bin/
     override-pull: |
       snapcraftctl set-version "$PKG_TAG"
       snapcraftctl pull
@@ -53,5 +53,5 @@ plugs:
   network-bind:
 
 architectures:
-  - build-on: ['arm64', 'amd64', 'ppc64el']
-    run-on: ['arm64','amd64', 'ppc64el']
+  - build-on: ['amd64']
+    run-on: ['amd64']

@@ -1,4 +1,4 @@
-GO_VERSION ?=1.21.4
+GO_VERSION ?= 1.22.2
 SNAP_BUILDER_IMAGE := local/snap-builder:2.0.0-$(shell echo $(GO_VERSION) | tr :/ __)
 
 
@@ -10,7 +10,7 @@ snap-victorialogs-builder-image:
 	|| docker build \
 		--build-arg GO_VERSION=$(GO_VERSION) \
 		--tag $(SNAP_BUILDER_IMAGE) \
-		snap/victorialogs/local
+		snap/local
 
 build-victorialogs-snap: snap-victorialogs-builder-image
 	docker run --rm \

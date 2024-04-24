@@ -47,7 +47,7 @@ confinement: strict # use 'strict' once you have the right plugs and slots
 parts:
   build:
     plugin: go
-    go-channel: 1.21/stable
+    go-channel: 1.22/stable
     go-importpath: github.com/VictoriaMetrics/VictoriaMetrics
     source: .
     source-type: local
@@ -78,6 +78,7 @@ layout:
     bind: $SNAP_DATA/var/lib/vmagent
   /etc/vmagent-scrape-config.yaml:
     bind-file: $SNAP_DATA/etc/vmagent-scrape-config.yaml
+
 architectures:
-  - build-on: ['arm64', 'amd64', 'ppc64el']
-    run-on: ['arm64','amd64', 'ppc64el']
+  - build-on: ['amd64']
+    run-on: ['amd64']
