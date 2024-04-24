@@ -41,7 +41,7 @@ parts:
       make app-local APP_NAME=vmauth
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -p $SNAPCRAFT_PART_BUILD/bin/vmauth $SNAPCRAFT_PART_INSTALL/bin/
-      cp -p $SNAPCRAFT_PART_SRC/local/vmauth-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmauth-wrapper $SNAPCRAFT_PART_INSTALL/bin/
       cp -p $SNAPCRAFT_PART_SRC/snap/local/vmauth-config.yml $SNAP_DATA/etc/vmauth-config.yml
     override-pull: |
       snapcraftctl set-version "$PKG_TAG"
