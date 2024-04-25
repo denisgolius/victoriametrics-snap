@@ -1,0 +1,59 @@
+name: vmalert-tool
+base: core18
+adopt-info: build
+icon: logo.png
+summary: VMAlert command-line tool
+description: |
+ VMAlert command-line tool
+
+ Unit testing for rules
+ # https://docs.victoriametrics.com/vmalert-tool/
+
+ You can use vmalert-tool to run unit tests for alerting and recording rules. It will perform the following actions:
+    - sets up an isolated VictoriaMetrics instance;
+    - simulates the periodic ingestion of time series;
+    - queries the ingested data for recording and alerting rules evaluation like vmalert;
+    - checks whether the firing alerts or resulting recording rules match the expected results.
+
+ See how to run vmalert-tool for unit test below:
+
+ # Run vmalert-tool with one or multiple test files via --files cmd-line flag
+ ./vmalert-tool unittest --files test1.yaml --files test2.yaml
+
+ vmalert-tool unittest is compatible with Prometheus config format for tests except promql_expr_test field. Use metricsql_expr_test field name instead.
+ The name is different because vmalert-tool validates and executes MetricsQL expressions, which aren’t always backward compatible with PromQL.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+parts:
+  build:
+    plugin: go
+    go-channel: 1.22/stable
+    go-importpath: github.com/VictoriaMetrics/VictoriaMetrics
+    source: .
+    source-type: local
+    build-packages: [build-essential, make]
+    override-build: |
+      make app-local APP_NAME=vmctl
+      mkdir -p $SNAPCRAFT_PART_INSTALL/bin
+      cp -p $SNAPCRAFT_PART_BUILD/bin/vmalert-tool $SNAPCRAFT_PART_INSTALL/bin/
+      cp -p $SNAPCRAFT_PART_SRC/snap/local/vmalert-tool-wrapper $SNAPCRAFT_PART_INSTALL/bin/
+    override-pull: |
+      snapcraftctl set-version "$PKG_TAG"
+      snapcraftctl pull
+apps:
+  vmctl:
+    command: bin/vmalert-tool-wrapper
+    daemon: simple
+    restart-condition: always
+    restart-delay: 10s
+    plugs: [network,network-bind]
+
+plugs:
+  network:
+  network-bind:
+
+architectures:
+  - build-on: ['amd64']
+    run-on: ['amd64']
