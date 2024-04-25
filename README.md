@@ -20,12 +20,12 @@ Learn more about [key concepts](https://docs.victoriametrics.com/keyconcepts/) o
 
 | Package | Version |
 | ------- | ------ |
-| victoriametrics | [![victoriametrics](https://snapcraft.io/victoriametrics/badge.svg)](https://snapcraft.io/victoriametrics) |
-| vmagent | [![vmagent](https://snapcraft.io/vmagent/badge.svg)](https://snapcraft.io/vmagent) |
-| vmalert | [![vmalert](https://snapcraft.io/vmalert/badge.svg)](https://snapcraft.io/vmalert) |
-| vmalert-tool | [![vmalert-tool](https://snapcraft.io/vmalert-tool/badge.svg)](https://snapcraft.io/vmalert-tool) |
-| vmauth | [![vmauth](https://snapcraft.io/vmauth/badge.svg)](https://snapcraft.io/vmauth) |
-| vmbackup | [![vmbackup](https://snapcraft.io/vmbackup/badge.svg)](https://snapcraft.io/vmbackup) |
-| vmrestore | [![vmrestore](https://snapcraft.io/vmrestore/badge.svg)](https://snapcraft.io/vmrestore) |
-| vmctl | [![vmctl](https://snapcraft.io/vmctl/badge.svg)](https://snapcraft.io/vmctl) |
-| victorialogs | [![victorialogs](https://snapcraft.io/victorialogs/badge.svg)](https://snapcraft.io/victorialogs) |
+| [victoriametrics](https://docs.victoriametrics.com/single-server-victoriametrics/) | [![victoriametrics](https://snapcraft.io/victoriametrics/badge.svg)](https://snapcraft.io/victoriametrics) |
+| [vmagent](https://docs.victoriametrics.com/vmagent/) | [![vmagent](https://snapcraft.io/vmagent/badge.svg)](https://snapcraft.io/vmagent) |
+| [vmalert](https://docs.victoriametrics.com/vmalert/) | [![vmalert](https://snapcraft.io/vmalert/badge.svg)](https://snapcraft.io/vmalert) |
+| [vmalert-tool](https://docs.victoriametrics.com/vmalert-tool/) | [![vmalert-tool](https://snapcraft.io/vmalert-tool/badge.svg)](https://snapcraft.io/vmalert-tool) |
+| [vmauth](https://docs.victoriametrics.com/vmauth/) | [![vmauth](https://snapcraft.io/vmauth/badge.svg)](https://snapcraft.io/vmauth) |
+| [vmbackup](https://docs.victoriametrics.com/vmbackup/) | [![vmbackup](https://snapcraft.io/vmbackup/badge.svg)](https://snapcraft.io/vmbackup) |
+| [vmrestore](https://docs.victoriametrics.com/vmrestore/) | [![vmrestore](https://snapcraft.io/vmrestore/badge.svg)](https://snapcraft.io/vmrestore) |
+| [vmctl](https://docs.victoriametrics.com/vmctl/) | [![vmctl](https://snapcraft.io/vmctl/badge.svg)](https://snapcraft.io/vmctl) |
+| [victorialogs](https://docs.victoriametrics.com/victorialogs/) | [![victorialogs](https://snapcraft.io/victorialogs/badge.svg)](https://snapcraft.io/victorialogs) |
