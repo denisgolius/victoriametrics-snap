@@ -35,7 +35,7 @@ parts:
     source-type: local
     build-packages: [build-essential, make]
     override-build: |
-      make app-local APP_NAME=vmctl
+      make app-local APP_NAME=vmalert-too
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -p $SNAPCRAFT_PART_BUILD/bin/vmalert-tool $SNAPCRAFT_PART_INSTALL/bin/
       cp -p $SNAPCRAFT_PART_SRC/snap/local/vmalert-tool-wrapper $SNAPCRAFT_PART_INSTALL/bin/
@@ -43,7 +43,7 @@ parts:
       snapcraftctl set-version "$PKG_TAG"
       snapcraftctl pull
 apps:
-  vmctl:
+  vmalert-tool:
     command: bin/vmalert-tool-wrapper
     daemon: simple
     restart-condition: always
