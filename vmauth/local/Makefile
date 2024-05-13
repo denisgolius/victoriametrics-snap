@@ -1,4 +1,4 @@
-GO_VERSION ?= 1.22.2
+GO_VERSION ?= 1.22.3
 SNAP_BUILDER_IMAGE := local/snap-vmauth-builder:2.0.0-$(shell echo $(GO_VERSION) | tr :/ __)
 
 # truncate pkg_tag, snap has limitations for name length
