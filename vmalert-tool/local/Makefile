@@ -1,4 +1,4 @@
-GO_VERSION ?= 1.22.4
+GO_VERSION ?= 1.22.5
 SNAP_BUILDER_IMAGE := local/snap-vmalert-tool-builder:2.0.0-$(shell echo $(GO_VERSION) | tr :/ __)
 
 # truncate pkg_tag, snap has limitations for name length
